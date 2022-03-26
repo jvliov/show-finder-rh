@@ -1,0 +1,61 @@
+
+
+.header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
+}
+
+.header a {
+    flex: 1;
+    color:black;
+    font-size: 1.5em;
+}
+
+.buttonBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+
+}
+
+.buttonBox button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+.imageBox {
+    position: relative;
+    max-width: 80vw;
+    background-color: #04AA6D;
+    
+}
+
+.imageBox img {
+    border-radius: 1.5rem;
+    object-fit: fill;
+    height: auto;
+}
+
+.imageBox .names {
+    background-color: green;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
