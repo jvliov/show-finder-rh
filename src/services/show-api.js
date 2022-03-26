@@ -1,5 +1,5 @@
 import axios from "axios"
-import * as showKeys from './config'
+import {showKeys} from './config'
 
 let showList = undefined
 
