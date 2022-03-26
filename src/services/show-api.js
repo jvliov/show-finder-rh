@@ -30,6 +30,7 @@ let genre_ids = {
     10768: "War & Politics",
     37: "Western"
   }
+  
 
 export async function getList(updateList = false) {
     if(!showList || updateList) {
