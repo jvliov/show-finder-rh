@@ -2,6 +2,12 @@ import axios from "axios"
 
 let showList = undefined
 
+let genre_ids = {
+    10759: "Action & Adventure",
+    28: "action"
+  }
+  
+
 export async function getList(updateList = false) {
     if(!showList || updateList) {
         //create with axios with actual pull data
