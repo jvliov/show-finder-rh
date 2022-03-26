@@ -1,10 +1,6 @@
-import keys from './keys'
+let showList = undefined
 
-keys
-
-showList = undefined
-
-function getList(updateList = false) {
+export function getList(updateList = false) {
     if(!showList || updateList) {
         //create with axios with actual pull data
         showList = []
@@ -12,7 +8,7 @@ function getList(updateList = false) {
     return showList
 }
 
-function getShow(id) {
+export function getShow(id) {
     //axios id
     //return response.data
 
