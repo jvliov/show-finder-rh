@@ -1,10 +1,6 @@
-import {showKeys} from './config'
-import axios from 'axios'
+let showList = undefined
 
-
-showList = undefined
-
-function getList(updateList = false) {
+export function getList(updateList = false) {
     if(!showList || updateList) {
         //create with axios with actual pull data
         showList = []
