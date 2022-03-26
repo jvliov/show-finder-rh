@@ -1,22 +1,7 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-import '../App.css';
-
->>>>>>> Stashed changes
-function Home() {
-
-
-
-  return (
-    <main>
-      <img src={`https://image.tmdb.org/t/p/w500${getShow(1000).poster_path}`} alt="Detective Pikachu"></img>
-    </main>
-  );
-=======
 import React, {useStates, useEffect} from 'react'
 import * as shows from '../services/show-api'
-// import * as styles from './home.module.css'
+import * as styles from './home.module.css'
+
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -37,7 +22,6 @@ class HomePage extends React.Component {
     </main>
     );
   }
->>>>>>> Stashed changes
 }
 
 export default HomePage;
