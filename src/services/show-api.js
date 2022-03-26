@@ -1,8 +1,11 @@
+import axios from "axios"
+
 let showList = undefined
 
-export function getList(updateList = false) {
+export async function getList(updateList = false) {
     if(!showList || updateList) {
         //create with axios with actual pull data
+        let resp = await axios.get()
         showList = []
     }
     return showList
