@@ -26,9 +26,10 @@ function WatchlistPage() {
     async function fetchData() {
       console.log(user)
 
-      await setRec((await genRecommends(user)).titles)
+      setRec((await genRecommends(user)).titles)
     }
 
+    if(user)
     fetchData()
 
   }, [user])
