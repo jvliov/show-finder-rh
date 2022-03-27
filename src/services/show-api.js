@@ -1,5 +1,6 @@
 import axios from "axios"
 import {showKeys} from './config'
+import {getGenreMap, updateGenreMap} from './firebase'
 
 let showList = undefined
 
@@ -59,4 +60,26 @@ export async function getServices(wm_id) {
     }
 
     return services
+}
+
+export async function decGenre(user, genre_num){
+    let genre_map = getGenreMap(user)
+    if(genre_num in genre_map){
+        genre_map[genre_num]--
+    } else {
+        genre_map[genre_num] = -1
+    }
+
+    updateGenreMap(user, genre_map)
+}
+
+export async function incGenre(user, genre_num){
+    let genre_map = getGenreMap(user)
+    if(genre_num in genre_map){
+        genre_map[genre_num]++
+    }else{
+        genre_map[genre_num] = 1
+    }
+
+    updateGenreMap(user, genre_map)
 }
