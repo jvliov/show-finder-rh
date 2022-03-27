@@ -3,7 +3,7 @@ import {showKeys} from './config'
 
 let showList = undefined
 
-let genre_ids = {
+export let genre_ids = {
     28: "Action",
     10759: "Action & Adventure",
     12: "Adventure",
