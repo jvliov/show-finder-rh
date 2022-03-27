@@ -1,0 +1,19 @@
+h1 {
+    font-size: 3rem;
+}
+
+p {
+    font-size: larger;
+}
+
+.login__container p {
+    margin-bottom: 0.2rem;
+    text-align: left;
+    margin-left: 7.3rem;
+}
+
+.login__container button {
+    margin-top: 0.1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}

@@ -1,5 +1,6 @@
-import { firebaseConfig } from "./config";
+import { firebaseConfig, showKeys } from "./config";
 import { initializeApp } from "firebase/app";
+import axios from "axios"
 import {
   GoogleAuthProvider,
   getAuth,
@@ -87,13 +88,24 @@ export async function updateWatchList(user, tmdb_ID){
   //add (array.push) tmdb_ID to user's watch_list
 
   //return name given WM ID
-
 }
 
-export async function genRecommends(user, genre_map){
+export async function genRecommends(user){
   //based on genre_map numbers pick movies with user's top rated genre
-  //if tie then we can present all using the WatchMode API
-  //return result of the axios call
+  let genre_map = getGenreMap(user)
+  let highVal = -99999999 //might want to change to an element's value in the map
+  let highKey = Object.keys(genre_map)[0]
+  for(let e in Object.keys(genre_map)){
+    //if e.val > highest then e.val = highest
+    if(genre_map[e] > highVal){
+      highVal = genre_map[e]
+      highKey = e
+    }
+  }
+  //highkey should contain the genre_id of the favorite genre
+  let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20&genres=${highKey}`)
+
+  return resp.data
 }
 
 export {
