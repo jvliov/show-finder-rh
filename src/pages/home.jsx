@@ -40,14 +40,6 @@ import { genre_ids } from '../services/show-api'
 //           <button><i className="fa-solid fa-check"></i></button>
 //         </div>
 //       </main>
-<<<<<<< HEAD
-=======
-import React, {useState, useEffect} from 'react'
-import { Link, useNavigate } from "react-router-dom"
-import { auth, getGenreMap, updateGenreMap, logout} from "../services/firebase"
-import { useAuthState } from "react-firebase-hooks/auth"
-import { query, collection, getDocs, where } from "firebase/firestore";
->>>>>>> 6dee2169347acf64c0ac10270d5b9b93712d9d2a
 
 //class HomePage extends React.Component {
 
@@ -68,7 +60,6 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 
     }
 
-<<<<<<< HEAD
     const getGenres = async () => {
       setGenres(["Action", "Adventure"])
       // for(var i = 0; i < show.genre_ids.length; i++){
@@ -79,9 +70,6 @@ import { query, collection, getDocs, where } from "firebase/firestore";
     }
 
     useEffect(() => {
-=======
-    useEffect(async () => {
->>>>>>> 6dee2169347acf64c0ac10270d5b9b93712d9d2a
       if (loading) return;
       if (!user) return navigate("/");
 
@@ -105,7 +93,6 @@ import { query, collection, getDocs, where } from "firebase/firestore";
         return (
       <main>
         <div className="header">
-        <button className="dashboard_btn" onClick={logout}>Logout</button>
           <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
           <h1>ShowFinder</h1>
           <a href='/settings'><i className="fa-solid fa-gear"></i></a>

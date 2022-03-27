@@ -1,0 +1,21 @@
+.header {
+  text-align: center;
+}
+
+h2 {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+h4 {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+button {
+    background-color: black;
+    color: white;
+    margin: 1.5rem;
+    border-radius: 4px;
+    font-size: large;
+}
