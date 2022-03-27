@@ -51,5 +51,12 @@ export async function getShow(tmdb_id) {
 }
 
 export async function getServices(wm_id) {
-    return ["Netflix", "Hulu", "HBO Max"]
+    let services = []
+
+    let resp = await axios.get(`https://api.watchmode.com/v1/title/${wm_id}/sources/?apiKey=${showKeys.watchmode}`)
+    for(let i = 0; i < resp.data.length; i++) {
+        if(!services.includes(resp.data[i].name)) services.push(resp.data[i].name)
+    }
+
+    return services
 }
