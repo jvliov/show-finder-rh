@@ -56,10 +56,8 @@ const getGenreMap = async (user) => {
   if (!user) return undefined
 
   const userQuery = query(collection(db, "users"), where("uid", "==", user.uid));
-  console.log(userQuery)
   const docs = (await getDocs(userQuery)).docs[0]
   
-  console.log(docs.id)
 
   user["fb_id"] = docs.id 
 
@@ -70,14 +68,12 @@ const getGenreMap = async (user) => {
 const updateGenreMap = async (user, map) => {
   if (!user) return
 
-  console.log("User", user)
+  console.log(await map)
 
-  const userQuery = query(collection(db, "users"), where("uid", "==", user.uid));
   const docRef = doc(db, 'users', user.fb_id);
 
-  console.log(docRef)
   const docs = await updateDoc(docRef, {
-    genres: map
+    genres: await map
   })
 }
 

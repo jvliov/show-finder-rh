@@ -2,26 +2,30 @@ import * as shows from '../services/show-api'
 import './home.css'
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { auth,} from "../services/firebase"
+import { auth, } from "../services/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { genre_ids } from '../services/show-api'
 
 function HomePage() {
   const [user, loading, error] = useAuthState(auth);
+  const [showList, setShowList] = useState([])
   const [show, setShow] = useState({})
   const [genres, setGenres] = useState([])
+  const [movieIndex, setMovieIndex] = useState(0)
+
   const imgRef = React.createRef()
   const navigate = useNavigate();
 
-  const fetchShow = async () => {
-    console.log("show")
-    setShow(await shows.getShow(447404))
-    console.log("show1")
-
+  const fetchShowList = async () => {
+    let list = await shows.getList(true)
+    console.log("List", list)
+    await setShowList(list)
   }
 
   const getGenres = async () => {
     let genre_list = []
+
+    console.log(show)
 
     for (var i = 0; i < Object.keys(show.genres).length; i++) {
       if (show.genres[i].id in genre_ids) {
@@ -44,22 +48,23 @@ function HomePage() {
   useEffect(async () => {
     console.log("Test 1")
 
-    await fetchShow()
+    await fetchShowList()
+    if(!("tmdb_id" in showList.titles[movieIndex])) {
+      setMovieIndex(movieIndex+1)
+      return
+    }
+    await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
     await getGenres()
 
-  
-    console.log("Test")
-  }, [])
 
-  useEffect(() => {
+    console.log("Test")
+  }, [movieIndex])
+
+
+  useEffect(async () => {
     imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
     imgRef.current.alt = show.title
   })
-
-  const liked = () => {
-    
-  }
-
 
   return (
     <main>
@@ -80,8 +85,18 @@ function HomePage() {
       </div>
 
       <div className="buttonBox">
-        <button><i className="fa-solid fa-x"></i></button>
-        <button><i className="fa-solid fa-check"></i></button>
+        <button onClick={() => { 
+          setMovieIndex(movieIndex + 1)
+          for(let id in genre_ids) {
+            shows.decGenre(user, id)
+          }
+         }}><i className="fa-solid fa-x"></i></button>
+        <button onClick={() => { 
+          setMovieIndex(movieIndex + 1)
+          for(let id in genre_ids) {
+            shows.incGenre(user, id)
+          }
+          }}><i className="fa-solid fa-check"></i></button>
       </div>
 
       <div className='infoParent'>
