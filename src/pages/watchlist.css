@@ -1,0 +1,17 @@
+.card {
+    width: 24.4rem;
+    height: 170px;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.card h1 {
+    font-size: xx-large;
+}
+
+.card h2 {
+    text-align: center;
+    margin: 0rem;
+}
