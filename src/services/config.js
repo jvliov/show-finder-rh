@@ -1,5 +1,7 @@
+
+
 export const firebaseConfig = {
-    apiKey: "AIzaSyANlRgj2KvTQpz4d_gBjay07660OANWI1Y",
+    apiKey: process.env.FB_API_KEY,
     authDomain: "show-finder-rh.firebaseapp.com",
     projectId: "show-finder-rh",
     storageBucket: "show-finder-rh.appspot.com",
@@ -9,6 +11,6 @@ export const firebaseConfig = {
   };
 
 export const showKeys = {
-    watchmode: 'dcgqyFNE9IxAu4bcLXuFabS247LBYv0rD5oFwdmO',
-    tmdb: 'cacaf0657a4cac543400f7fbbfebe0b2'
+    watchmode: process.env.WM_API_KEY,
+    tmdb: process.env.TMDB_API_KEY
 }
