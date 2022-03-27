@@ -1,6 +1,5 @@
 import { firebaseConfig } from "./config";
 import { initializeApp } from "firebase/app";
-import firebase from "./firebase";
 import {
   GoogleAuthProvider,
   getAuth,

@@ -1,6 +1,6 @@
 // import React, { useStates, useEffect } from 'react'
-// import * as shows from '../services/show-api'
-// import './home.css'
+import * as shows from '../services/show-api'
+import './home.css'
 
 // class HomePage extends React.Component {
 //   constructor(props) {
@@ -37,8 +37,6 @@
 //         </div>
 //       </main>
 import React, {useState, useEffect} from 'react'
-import * as shows from '../services/show-api'
-import * as styles from './home.module.css'
 import { Link, useNavigate } from "react-router-dom"
 import { auth, db, logout } from "../services/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
@@ -53,39 +51,52 @@ import { query, collection, getDocs, where } from "firebase/firestore";
   //render() {
   function HomePage() {
     const [user, loading, error] = useAuthState(auth);
-    const [name, setName] = useState("");
+    const [show, setShow] = useState({})
+    const imgRef = React.createRef()
     const navigate = useNavigate();
-    const fetchUserName = async () => {
-      try {
-        const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-        const doc = await getDocs(q);
-        const data = doc.docs[0].data();
-        setName(data.name);
-      } catch (err) {
-        console.error(err);
-        alert("An error occured while fetching user data");
-      }
-    };
+
+    const fetchShow = async () => {
+      setShow(await shows.getShow(100))
+    }
 
     useEffect(() => {
       if (loading) return;
       if (!user) return navigate("/");
-      fetchUserName();
+      
     }, [user, loading]);
 
-    //console.log("test",this.state.show)
+    useEffect(() => {
+      fetchShow()
+      imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
+      imgRef.current.alt = show.title
+    }, [show])
 
-    return (
+
+        return (
       <main>
-        <Link to="/login">Login</Link>
-      {/* <img src={`https://image.tmdb.org/t/p/w500${this.state.show.poster_path}`} alt="Detective Pikachu"></img> */}
-      <button className="dashboard_btn" onClick={logout}>Logout</button>
-      <div>Logged in as
-        <div>{name}</div>
-        <div>{user?.email}</div>
-      </div>
-    </main>
-    );
+        <div className="header">
+          <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
+          <h1>ShowFinder</h1>
+          <a href='/settings'><i className="fa-solid fa-gear"></i></a>
+        </div>
+
+        <div className="imageBox">
+
+          <img ref={imgRef}></img>
+          <div className='names'>
+            <h2>Name</h2>
+            <h3>genre</h3>
+          </div>
+
+        </div>
+
+        <div className="buttonBox">
+          <button><i className="fa-solid fa-x"></i></button>
+          <button><i className="fa-solid fa-check"></i></button>
+        </div>
+
+        
+      </main> )
   }
 //}
 

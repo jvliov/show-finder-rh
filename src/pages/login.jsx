@@ -12,7 +12,7 @@ function LoginPage() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/");
+    if (user) navigate("/home");
   }, [user, loading]);
   return (
     <div className="login">
@@ -20,9 +20,6 @@ function LoginPage() {
         <button className="login__google" onClick={signInWithGoogle}>
           Login with Google
         </button>
-        <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
-        </div>
       </div>
     </div>
   );

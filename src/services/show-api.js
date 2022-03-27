@@ -33,7 +33,7 @@ let genre_ids = {
   }
   
 
-export function getList(updateList = false) {
+export async function getList(updateList = false) {
     if (!showList || updateList) {
         //create with axios with actual pull data
         let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20`)
@@ -42,7 +42,7 @@ export function getList(updateList = false) {
     return showList
 }
 
-export function getShow(id) {
+export async function getShow(id) {
     //axios id
     // let resp = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${showKeys.tmdb}`)
 
