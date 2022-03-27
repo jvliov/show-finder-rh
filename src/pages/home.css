@@ -15,9 +15,6 @@ img {
 
 }
 
-.header h1{
-
-}
 
 .header a {
     flex: 1;
@@ -66,3 +63,13 @@ img {
     left: 0;
 }
 
+
+.info {
+    display: flex;
+    justify-content: center;
+    
+    
+    position: absolute;
+    top: 100vh;
+    max-width: 80%;
+}
