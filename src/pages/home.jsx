@@ -115,7 +115,7 @@ function HomePage() {
         }
       }>
         <button onClick={() => {
-          if (movieIndex === 50) {
+          if (movieIndex === 150) {
             console.log("HIT END")
             return
           }
@@ -128,7 +128,7 @@ function HomePage() {
 
         }}><i className="fa-solid fa-x"></i></button>
         <button onClick={() => {
-          if (movieIndex === 20) {
+          if (movieIndex === 150) {
             console.log("HIT END")
             return
           }
