@@ -29,8 +29,9 @@ function WatchlistPage() {
       setRec((await genRecommends(user)).titles)
     }
 
-    if(user)
-    fetchData()
+    if(user) {
+      fetchData()
+    }
 
   }, [user])
 

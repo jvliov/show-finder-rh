@@ -80,6 +80,7 @@ async function genRecommends(user) {
   let highVal = -99999999 //might want to change to an element's value in the map
   let highKey = Object.keys(genre_map)[0]
 
+  console.log(genre_map)
 
   Object.keys(genre_map).forEach((e) => {
 
@@ -90,7 +91,9 @@ async function genRecommends(user) {
   })
 
 
-  let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20&genres=${highKey}`)
+  let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&limit=20&genres=${highKey}`)
+
+  console.log(resp.data)
 
   return resp.data
 }
