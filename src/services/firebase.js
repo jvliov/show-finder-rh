@@ -5,9 +5,6 @@ import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
 import {
@@ -72,12 +69,12 @@ const updateGenreMap = async (user, map) => {
 
   const docRef = doc(db, 'users', user.fb_id);
 
-  const docs = await updateDoc(docRef, {
+  await updateDoc(docRef, {
     genres: map
   })
 }
 
-export async function genRecommends(user){
+async function genRecommends(user){
   //based on genre_map numbers pick movies with user's top rated genre
   let genre_map = getGenreMap(user)
   let highVal = -99999999 //might want to change to an element's value in the map
@@ -101,5 +98,6 @@ export {
     signInWithGoogle,
     logout,
     getGenreMap,
-    updateGenreMap
+    updateGenreMap,
+    genRecommends
   };
