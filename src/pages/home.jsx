@@ -11,6 +11,7 @@ function HomePage() {
   const [showList, setShowList] = useState([])
   const [show, setShow] = useState({})
   const [genres, setGenres] = useState([])
+  const [services, setServices] = useState([])
   const [movieIndex, setMovieIndex] = useState(0)
 
   const imgRef = React.createRef()
@@ -68,13 +69,7 @@ function HomePage() {
   useEffect(() => {
     async function fetchData() {
 
-      if (!("tmdb_id" in showList.titles[movieIndex])) {
-        setMovieIndex(movieIndex + 1)
-        return
-      }
       await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
-      await getGenres()
-
 
     }
 
@@ -84,6 +79,7 @@ function HomePage() {
   useEffect(() => {
     async function fetchData() {
       await getGenres()
+      await setServices(await shows.getServices(showList.titles[movieIndex].id))
     }
 
     fetchData()
@@ -93,6 +89,7 @@ function HomePage() {
     imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
     imgRef.current.alt = show.title
   },[show])
+
 
   return (
     <main>
@@ -112,9 +109,13 @@ function HomePage() {
 
       </div>
 
-      <div className="buttonBox">
+      <div className="buttonBox" style={
+        {
+          backgroundColor: 0xFF0000
+        }
+      }>
         <button onClick={() => {
-          if (movieIndex === 20) {
+          if (movieIndex === 50) {
             console.log("HIT END")
             return
           }
@@ -154,7 +155,7 @@ function HomePage() {
           {genres.map(genre => <li key={genre}>{genre}</li>)}
 
           <h2>Where to Watch</h2>
-          {genres.map(genre => <li key={genre}>{genre}</li>)}
+          {services.map(service => <li key={service}>{service}</li>)}
 
 
         </div>
