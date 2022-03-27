@@ -63,7 +63,7 @@ export let reverse_genre_ids = {
 
 
 export async function getList(updateList = true) {
-    let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20`)
+    let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=50`)
     showList = resp.data
     return showList
 }
