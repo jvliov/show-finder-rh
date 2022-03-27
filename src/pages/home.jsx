@@ -1,47 +1,11 @@
-// import React, { useStates, useEffect } from 'react'
 import * as shows from '../services/show-api'
 import './home.css'
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { auth, db, logout } from "../services/firebase"
+import { auth,} from "../services/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
-import { query, collection, getDocs, where } from "firebase/firestore";
-import { showKeys } from '../services/config'
 import { genre_ids } from '../services/show-api'
 
-// class HomePage extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { show: shows.getShow(1000) };
-//   }
-
-//   render() {
-
-//     return (
-//       <main>
-//         <div className="header">
-//           <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
-//           <h1>ShowFinder</h1>
-//           <a href='/settings'><i className="fa-solid fa-gear"></i></a>
-//         </div>
-
-//         <div className="imageBox">
-
-//           <img src={`https://image.tmdb.org/t/p/w500${this.state.show.poster_path}`} alt="Detective Pikachu"></img>
-//           <div className='names'>
-//             <h2>Name</h2>
-//             <h3>genre</h3>
-//           </div>
-
-//         </div>
-
-//         <div className="buttonBox">
-//           <button><i className="fa-solid fa-x"></i></button>
-//           <button><i className="fa-solid fa-check"></i></button>
-//         </div>
-//       </main>
-
-//class HomePage extends React.Component {
 function HomePage() {
   const [user, loading, error] = useAuthState(auth);
   const [show, setShow] = useState({})
@@ -50,54 +14,51 @@ function HomePage() {
   const navigate = useNavigate();
 
   const fetchShow = async () => {
+    console.log("show")
     setShow(await shows.getShow(447404))
+    console.log("show1")
+
   }
 
   const getGenres = async () => {
-    let genres = []
-    for (var i = 0; i < Object.keys(show.genre_ids).length; i++) {
-      if (show.genre_ids[i] in genre_ids) {
-        genres.push(genre_ids[show.genre_ids[i]])
+    let genre_list = []
+
+    for (var i = 0; i < Object.keys(show.genres).length; i++) {
+      if (show.genres[i].id in genre_ids) {
+        genre_list.push(show.genres[i].name)
       }
     }
-    setGenres(genres)
+
+    setGenres(genre_list)
 
   }
 
 
 
-    useEffect(() => {
-      if (loading) return;
-      if (!user) return navigate("/");
-      
-    }, [user, loading]);
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/");
 
-    useEffect(() => {
-      fetchShow()
-      getGenres()
-      imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
-      imgRef.current.alt = show.title
+  }, [user, loading]);
 
-    }, [show])
+  useEffect(async () => {
+    console.log("Test 1")
 
+    await fetchShow()
+    await getGenres()
 
-  //       return (
-  //     <main>
-  //       <div className="header">
-  //       <button className="dashboard_btn" onClick={logout}>Logout</button>
-  //         <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
-  //         <h1>ShowFinder</h1>
-  //         <a href='/settings'><i className="fa-solid fa-gear"></i></a>
-  //       </div>
+  
+    console.log("Test")
+  }, [])
 
-  // useEffect(() => {
-  //   fetchShow()
-  //   getGenres()
+  useEffect(() => {
+    imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
+    imgRef.current.alt = show.title
+  })
 
-  //   imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
-  //   imgRef.current.alt = show.title
-
-  // }, [show])
+  const liked = () => {
+    
+  }
 
 
   return (
@@ -124,25 +85,24 @@ function HomePage() {
       </div>
 
       <div className='infoParent'>
-      <div className='info'>
+        <div className='info'>
 
-        <h2>Description</h2>
-        <p>{show.overview}</p>
+          <h2>Description</h2>
+          <p>{show.overview}</p>
 
-        <h2>Genres</h2>
-        {genres.map(genre => <li key={genre}>{genre}</li>)}
+          <h2>Genres</h2>
+          {genres.map(genre => <li key={genre}>{genre}</li>)}
 
-        <h2>Where to Watch</h2>
-        {genres.map(genre => <li key={genre}>{genre}</li>)}
+          <h2>Where to Watch</h2>
+          {genres.map(genre => <li key={genre}>{genre}</li>)}
 
 
-      </div>
-      </div>
+        </div>
+      </div>Î
 
 
     </main>)
 }
-//}
 
 export default HomePage;
 
