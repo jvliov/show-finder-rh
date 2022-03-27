@@ -68,12 +68,12 @@ const getGenreMap = async (user) => {
 const updateGenreMap = async (user, map) => {
   if (!user) return
 
-  console.log(await map)
+  console.log(map)
 
   const docRef = doc(db, 'users', user.fb_id);
 
   const docs = await updateDoc(docRef, {
-    genres: await map
+    genres: map
   })
 }
 

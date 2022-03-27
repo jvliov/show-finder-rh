@@ -84,29 +84,38 @@ export async function getServices(wm_id) {
     return services
 }
 
-export async function decGenre(user, genre_num) {
+export async function decGenre(user, genre_nums) {
     let genre_map = await getGenreMap(user)
-    if (genre_num in genre_map) {
-        genre_map[genre_num]--
-    } else {
-        genre_map[genre_num] = -1
-    }
+
+    genre_nums.forEach((e) => {
+        if (e in genre_map) {
+            genre_map[e]--
+        } else {
+            genre_map[e] = -1
+        }
+    })
+
 
     console.log(genre_map)
 
     await updateGenreMap(user, genre_map)
 }
 
-export async function incGenre(user, genre_num) {
+export async function incGenre(user, genre_nums) {
     let genre_map = await getGenreMap(user)
 
-    console.log(genre_map)
+    console.log(genre_nums)
 
-    if (genre_num in genre_map) {
-        genre_map[genre_num]++
-    } else {
-        genre_map[genre_num] = 1
-    }
+    genre_nums.forEach((e) => {
+        if (e in genre_map) {
+            genre_map[e]++
+        } else {
+            genre_map[e] = 1
+        }
+    })
+
+
+    console.log(genre_map)
 
     await updateGenreMap(user, genre_map)
 }

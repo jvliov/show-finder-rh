@@ -49,8 +49,8 @@ function HomePage() {
     console.log("Test 1")
 
     await fetchShowList()
-    if(!("tmdb_id" in showList.titles[movieIndex])) {
-      setMovieIndex(movieIndex+1)
+    if (!("tmdb_id" in showList.titles[movieIndex])) {
+      setMovieIndex(movieIndex + 1)
       return
     }
     await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
@@ -85,18 +85,27 @@ function HomePage() {
       </div>
 
       <div className="buttonBox">
-        <button onClick={() => { 
+        <button onClick={() => {
           setMovieIndex(movieIndex + 1)
-          for(let id in genre_ids) {
-            shows.decGenre(user, id)
-          }
-         }}><i className="fa-solid fa-x"></i></button>
-        <button onClick={() => { 
+
+          let g_id = []
+
+          genres.forEach((e) => {g_id.push(shows.reverse_genre_ids[e])})
+          shows.decGenre(user, g_id)
+
+        }}><i className="fa-solid fa-x"></i></button>
+        <button onClick={() => {
           setMovieIndex(movieIndex + 1)
-          for(let id in genre_ids) {
-            shows.incGenre(user, id)
-          }
-          }}><i className="fa-solid fa-check"></i></button>
+
+          let g_id = []
+
+          genres.forEach((e) => {g_id.push(shows.reverse_genre_ids[e])})
+
+          console.log(g_id)
+
+          shows.incGenre(user, g_id)
+
+        }}><i className="fa-solid fa-check"></i></button>
       </div>
 
       <div className='infoParent'>
