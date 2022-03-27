@@ -77,15 +77,6 @@ const updateGenreMap = async (user, map) => {
   })
 }
 
-export async function updateWatchList(user, tmdb_ID){
-  //database should store watch list with tmdb id's since they don't cost
-  //anything, and it's given with the same axios call we use in the main to
-  //get the movie on screen
-  //add (array.push) tmdb_ID to user's watch_list
-
-  //return name given WM ID
-}
-
 export async function genRecommends(user){
   //based on genre_map numbers pick movies with user's top rated genre
   let genre_map = getGenreMap(user)
