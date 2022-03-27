@@ -1,7 +1,7 @@
 import * as shows from '../services/show-api'
 import './home.css'
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { auth, } from "../services/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { genre_ids } from '../services/show-api'
@@ -43,28 +43,57 @@ function HomePage() {
     if (loading) return;
     if (!user) return navigate("/");
 
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
-  useEffect(async () => {
-    console.log("Test 1")
+  useEffect(() => {
+    async function fetchData() {
+      console.log("Test 1")
 
-    await fetchShowList()
-    if (!("tmdb_id" in showList.titles[movieIndex])) {
-      setMovieIndex(movieIndex + 1)
-      return
+      await fetchShowList()
+      
+      // if (!("tmdb_id" in showList.titles[movieIndex])) {
+      //   setMovieIndex(movieIndex + 1)
+      //   return
+      // }
+      await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
+      await getGenres()
+
+
+      console.log("Test")
     }
-    await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
-    await getGenres()
 
-
-    console.log("Test")
+    fetchData()
   }, [movieIndex])
 
+  useEffect(() => {
+    async function fetchData() {
 
-  useEffect(async () => {
+      if (!("tmdb_id" in showList.titles[movieIndex])) {
+        setMovieIndex(movieIndex + 1)
+        return
+      }
+      await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
+      await getGenres()
+
+
+      console.log("Test")
+    }
+
+    fetchData()
+  }, [showList])
+
+  useEffect(() => {
+    async function fetchData() {
+      await getGenres()
+    }
+
+    fetchData()
+  }, [show])
+
+  useEffect(() => {
     imgRef.current.src = `https://image.tmdb.org/t/p/w500${show.poster_path}`
     imgRef.current.alt = show.title
-  })
+  },[show])
 
   return (
     <main>
@@ -86,20 +115,28 @@ function HomePage() {
 
       <div className="buttonBox">
         <button onClick={() => {
+          if (movieIndex === 20) {
+            console.log("HIT END")
+            return
+          }
           setMovieIndex(movieIndex + 1)
 
           let g_id = []
 
-          genres.forEach((e) => {g_id.push(shows.reverse_genre_ids[e])})
+          genres.forEach((e) => { g_id.push(shows.reverse_genre_ids[e]) })
           shows.decGenre(user, g_id)
 
         }}><i className="fa-solid fa-x"></i></button>
         <button onClick={() => {
+          if (movieIndex === 20) {
+            console.log("HIT END")
+            return
+          }
           setMovieIndex(movieIndex + 1)
 
           let g_id = []
 
-          genres.forEach((e) => {g_id.push(shows.reverse_genre_ids[e])})
+          genres.forEach((e) => { g_id.push(shows.reverse_genre_ids[e]) })
 
           console.log(g_id)
 

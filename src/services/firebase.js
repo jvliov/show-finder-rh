@@ -8,14 +8,14 @@ import {
   signOut,
 } from "firebase/auth";
 import {
-    getFirestore,
-    query,
-    getDocs,
-    collection,
-    where,
-    addDoc,
-    updateDoc,
-    doc
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+  updateDoc,
+  doc
 } from "firebase/firestore";
 
 const app = initializeApp(firebaseConfig);
@@ -46,17 +46,17 @@ const signInWithGoogle = async () => {
 };
 
 const logout = () => {
-    signOut(auth);
-  };
+  signOut(auth);
+};
 
 const getGenreMap = async (user) => {
   if (!user) return undefined
 
   const userQuery = query(collection(db, "users"), where("uid", "==", user.uid));
   const docs = (await getDocs(userQuery)).docs[0]
-  
 
-  user["fb_id"] = docs.id 
+
+  user["fb_id"] = docs.id
 
   return docs.data().genres || {}
 
@@ -74,30 +74,33 @@ const updateGenreMap = async (user, map) => {
   })
 }
 
-async function genRecommends(user){
+async function genRecommends(user) {
   //based on genre_map numbers pick movies with user's top rated genre
-  let genre_map = getGenreMap(user)
+  let genre_map = await getGenreMap(user)
   let highVal = -99999999 //might want to change to an element's value in the map
   let highKey = Object.keys(genre_map)[0]
-  for(let e in Object.keys(genre_map)){
-    //if e.val > highest then e.val = highest
-    if(genre_map[e] > highVal){
+
+
+  Object.keys(genre_map).forEach((e) => {
+
+    if (genre_map[e] > highVal) {
       highVal = genre_map[e]
       highKey = e
     }
-  }
-  //highkey should contain the genre_id of the favorite genre
+  })
+
+
   let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20&genres=${highKey}`)
 
   return resp.data
 }
 
 export {
-    auth,
-    db,
-    signInWithGoogle,
-    logout,
-    getGenreMap,
-    updateGenreMap,
-    genRecommends
-  };
+  auth,
+  db,
+  signInWithGoogle,
+  logout,
+  getGenreMap,
+  updateGenreMap,
+  genRecommends
+};
