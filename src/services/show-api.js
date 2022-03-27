@@ -1,18 +1,43 @@
 import axios from "axios"
-import { showKeys } from './config'
+import {showKeys} from './config'
 
 let showList = undefined
 
 let genre_ids = {
+    28: "Action",
     10759: "Action & Adventure",
-    28: "action"
-}
-
+    12: "Adventure",
+    16: "Animation",
+    35: "Comedy",
+    80: "Crime",
+    99: "Documentary",
+    18: "Drama",
+    10751: "Family",
+    36: "History",
+    27: "Horror",
+    10762: "Kids",
+    10402: "Music",
+    9648: "Mystery",
+    10763: "News",
+    10764: "Reality",
+    10749: "Romance",
+    10765: "Sci-Fi & Fantasy",
+    878: "Science Fiction",
+    10766: "Soap",
+    10767: "Talk",
+    53: "Thriller",
+    10770: "TV Movie",
+    10752: "War",
+    10768: "War & Politics",
+    37: "Western"
+  }
+  
 
 export function getList(updateList = false) {
     if (!showList || updateList) {
         //create with axios with actual pull data
-        showList = []
+        let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20`)
+        showList = resp.data
     }
     return showList
 }
