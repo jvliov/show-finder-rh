@@ -8,6 +8,10 @@
     margin-bottom: 1.5rem;
 }
 
+.header a {
+    text-decoration: none;
+}
+
 .card h1 {
     font-size: xx-large;
 }

@@ -51,10 +51,10 @@ function HomePage() {
 
       await fetchShowList()
       
-      // if (!("tmdb_id" in showList.titles[movieIndex])) {
-      //   setMovieIndex(movieIndex + 1)
-      //   return
-      // }
+      if (!("tmdb_id" in showList.titles[movieIndex])) {
+        setMovieIndex(movieIndex + 1)
+        return
+      }
       await setShow(await shows.getShow(showList.titles[movieIndex].tmdb_id, showList.titles[movieIndex].tmdb_type))
       await getGenres()
 
@@ -98,7 +98,7 @@ function HomePage() {
     <main>
       <div className="header">
         <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
-        <h1>ShowFinder</h1>
+        <a href='/home'><h1>ShowFinder</h1></a>
         <a href='/settings'><i className="fa-solid fa-gear"></i></a>
       </div>
 

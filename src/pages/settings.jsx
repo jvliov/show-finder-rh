@@ -33,7 +33,7 @@ function SettingsPage() {
     <div className="SettingsPage">
       <div className="header">
           <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
-          <h1>ShowFinder</h1>
+          <a href='/home'><h1>ShowFinder</h1></a>
           <a href='/settings'><i className="fa-solid fa-gear"></i></a>
       </div>
       <h2>Greetings, {names[0]}</h2>

@@ -81,6 +81,7 @@ async function genRecommends(user) {
   let highVal = -99999999 //might want to change to an element's value in the map
   let highKey = Object.keys(genre_map)[0]
 
+  console.log(genre_map)
 
   Object.keys(genre_map).forEach((e) => {
 

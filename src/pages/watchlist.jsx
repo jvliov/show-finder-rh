@@ -24,13 +24,14 @@ function WatchlistPage() {
   useEffect(() => {
 
     async function fetchData() {
-      console.log(user)
+      //console.log(user)
 
       setRec((await genRecommends(user)).titles)
     }
 
-    if(user)
-    fetchData()
+    if(user) {
+      fetchData()
+    }
 
   }, [user])
 
@@ -39,7 +40,7 @@ function WatchlistPage() {
     <div className="WatchlistPage">
       <div className="header">
         <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
-        <h1>ShowFinder</h1>
+        <a href='/home'><h1>ShowFinder</h1></a>
         <a href='/settings'><i className="fa-solid fa-gear"></i></a>
       </div>
       <h2>Shows for you:</h2>
