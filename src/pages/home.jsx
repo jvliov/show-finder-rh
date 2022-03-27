@@ -40,6 +40,8 @@ import { genre_ids } from '../services/show-api'
 //           <button><i className="fa-solid fa-check"></i></button>
 //         </div>
 //       </main>
+
+//class HomePage extends React.Component {
 function HomePage() {
   const [user, loading, error] = useAuthState(auth);
   const [show, setShow] = useState({})
@@ -67,12 +69,6 @@ function HomePage() {
     useEffect(() => {
       if (loading) return;
       if (!user) return navigate("/");
-
-      // console.log("Loaded")
-      // let resp = await getGenreMap(user)
-      // resp["10"] = 1;
-      // console.log(resp)
-      // await updateGenreMap(user, {"10": 1})
       
     }, [user, loading]);
 
@@ -115,7 +111,7 @@ function HomePage() {
       <div className="imageBox">
 
         <img ref={imgRef}></img>
-        
+
         <div className='names'>
           <h2>{show.title}</h2>
         </div>
@@ -127,6 +123,7 @@ function HomePage() {
         <button><i className="fa-solid fa-check"></i></button>
       </div>
 
+      <div className='infoParent'>
       <div className='info'>
 
         <h2>Description</h2>
@@ -139,6 +136,7 @@ function HomePage() {
         {genres.map(genre => <li key={genre}>{genre}</li>)}
 
 
+      </div>
       </div>
 
 
