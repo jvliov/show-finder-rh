@@ -56,7 +56,8 @@ import { query, collection, getDocs, where } from "firebase/firestore";
     const navigate = useNavigate();
 
     const fetchShow = async () => {
-      setShow(await shows.getShow(100))
+      setShow(await shows.getShow(447404))
+
     }
 
     useEffect(() => {
