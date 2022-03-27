@@ -38,7 +38,7 @@ import './home.css'
 //       </main>
 import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { auth, db, logout } from "../services/firebase"
+import { auth, getGenreMap, updateGenreMap, logout} from "../services/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { query, collection, getDocs, where } from "firebase/firestore";
 
@@ -59,9 +59,15 @@ import { query, collection, getDocs, where } from "firebase/firestore";
       setShow(await shows.getShow(100))
     }
 
-    useEffect(() => {
+    useEffect(async () => {
       if (loading) return;
       if (!user) return navigate("/");
+
+      // console.log("Loaded")
+      // let resp = await getGenreMap(user)
+      // resp["10"] = 1;
+      // console.log(resp)
+      // await updateGenreMap(user, {"10": 1})
       
     }, [user, loading]);
 
@@ -75,6 +81,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
         return (
       <main>
         <div className="header">
+        <button className="dashboard_btn" onClick={logout}>Logout</button>
           <a href='/watchlist'><i className="fa-solid fa-book"></i></a>
           <h1>ShowFinder</h1>
           <a href='/settings'><i className="fa-solid fa-gear"></i></a>
