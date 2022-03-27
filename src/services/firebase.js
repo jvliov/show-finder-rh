@@ -1,6 +1,7 @@
 import { firebaseConfig, showKeys } from "./config";
 import { initializeApp } from "firebase/app";
 import axios from "axios"
+import { tmdb_wm_id } from "./show-api";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -90,7 +91,7 @@ async function genRecommends(user) {
   })
 
 
-  let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&source_ids=203,57&limit=20&genres=${highKey}`)
+  let resp = await axios.get(`https://api.watchmode.com/v1/list-titles/?apiKey=${showKeys.watchmode}&limit=20&genres=${tmdb_wm_id[highKey]}`)
 
   return resp.data
 }

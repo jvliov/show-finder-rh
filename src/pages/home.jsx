@@ -76,7 +76,6 @@ function HomePage() {
       await getGenres()
 
 
-      console.log("Test")
     }
 
     fetchData()

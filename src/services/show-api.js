@@ -4,6 +4,8 @@ import { getGenreMap, updateGenreMap } from './firebase'
 
 let showList = undefined
 
+
+
 export let genre_ids = {
     28: "Action",
     10759: "Action & Adventure",
@@ -14,6 +16,7 @@ export let genre_ids = {
     99: "Documentary",
     18: "Drama",
     10751: "Family",
+    14: "Fantasy",
     36: "History",
     27: "Horror",
     10762: "Kids",
@@ -30,6 +33,35 @@ export let genre_ids = {
     10752: "War",
     10768: "War & Politics",
     37: "Western"
+}
+
+export let tmdb_wm_id = {
+    28: 1,
+    10759: 39,
+    12: 2,
+    16: 3,
+    35: 4,
+    80: 5,
+    99: 6,
+    18: 7,
+    10751: 8,
+    14: 9,
+    36: 10,
+    27: 11,
+    10762: 21,
+    10402: 12,
+    9648: 13,
+    10763: 22,
+    10764: 23,
+    10749: 14,
+    10765: 40,
+    878: 15,
+    10766: 25,
+    10767: 26,
+    53: 17,
+    10752: 18,
+    10768: 41,
+    37: 19
 }
 
 export let reverse_genre_ids = {
