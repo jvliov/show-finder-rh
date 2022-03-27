@@ -1,0 +1,85 @@
+img {
+    border-radius: 2rem;
+    max-width: 85%;
+    height: auto;
+}
+
+.header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.header a {
+    flex: 1;
+    color:black;
+    font-size: 1.5em;
+}
+
+.buttonBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+
+}
+
+.buttonBox button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+.imageBox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imageBox p {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.names p {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.infoParent {
+    position: absolute;
+    top: 100vh;
+    max-width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-bottom: 2rem;
+}
+
+.info {
+    max-width: 90%;
+    text-align: left;
+
+}
+
+.info p {
+    padding-left: 1.5rem;
+}
